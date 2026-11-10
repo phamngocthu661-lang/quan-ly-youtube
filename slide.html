@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hướng Dẫn Sử Dụng & Thuyết Trình Hệ Thống Quản Lý YouTube V17.0</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f1f5f9;
+      color: #0f172a;
+      margin: 0;
+      padding: 0;
+    }
+    .app-box {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 14px;
+      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.05);
+    }
+    .app-top-tab {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 12px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #475569;
+      border: 1px solid transparent;
+      transition: all 0.15s ease;
+      cursor: pointer;
+    }
+    .app-top-tab:hover {
+      background: #f1f5f9;
+      color: #0f172a;
+    }
+    .app-top-tab.active-highlight {
+      background: #2563eb;
+      color: #ffffff;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.25);
+    }
+    .step-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      background: #2563eb;
+      color: #ffffff;
+      font-weight: 800;
+      font-size: 13px;
+      flex-shrink: 0;
+    }
+    .mock-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .mock-table th {
+      padding: 9px 11px;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: #334155;
+      background: #f8fafc;
+      border-bottom: 2px solid #e2e8f0;
+      text-align: left;
+    }
+    .mock-table td {
+      padding: 10px 11px;
+      font-size: 13.5px;
+      border-bottom: 1px solid #e2e8f0;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body class="p-3 md:p-5">
+
+  <!-- =================================================================== -->
+  <!-- THANH ĐIỀU KHIỂN SLIDE TRÊN CÙNG (RÕ RÀNG, DỄ BẤM)                  -->
+  <!-- =================================================================== -->
+  <div class="max-w-7xl mx-auto mb-3 app-box p-3.5 flex flex-wrap items-center justify-between gap-3 bg-white">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl bg-blue-600 text-white font-extrabold text-base flex items-center justify-center shadow">
+        YT
+      </div>
+      <div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <h1 class="text-base md:text-lg font-extrabold text-slate-900">BẢN TRÌNH CHIẾU HƯỚNG DẪN SỬ DỤNG ỨNG DỤNG YOUTUBE V17.0</h1>
+          <span class="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300 text-xs font-extrabold">Giao diện giống 100% Ứng dụng thật</span>
+        </div>
+        <p class="text-xs md:text-sm text-slate-600 font-medium">Bấm phím mũi tên <strong>⬅️ / ➡️</strong> hoặc bấm trực tiếp vào từng mục trên <strong>Thanh Menu Ứng Dụng</strong> bên dưới để xem hướng dẫn</p>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-2 flex-wrap">
+      <a href="https://phamngocthu661-lang.github.io/quan-ly-youtube/" target="_blank" class="px-3.5 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs md:text-sm shadow-sm">
+        🚀 Mở Ứng Dụng Thật (Online 24/7)
+      </a>
+      <button onclick="prevSlide()" class="px-3.5 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-300 font-extrabold text-xs md:text-sm">
+        ⬅️ Trang Trước
+      </button>
+      <span id="slideCounterBadge" class="px-3.5 py-2 rounded-lg bg-blue-50 text-blue-900 border border-blue-200 font-extrabold text-xs md:text-sm">
+        Trang 1 / 8
+      </span>
+      <button onclick="nextSlide()" class="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-xs md:text-sm shadow-sm">
+        Trang Tiếp ➡️
+      </button>
+    </div>
+  </div>
+
+  <!-- =================================================================== -->
+  <!-- MÔ PHỎNG THANH HEADER CỦA ỨNG DỤNG THẬT (BẤM VÀO ĐỂ CHUYỂN SLIDE!)  -->
+  <!-- =================================================================== -->
+  <div class="max-w-7xl mx-auto mb-4 app-box p-2.5 bg-white border-2 border-blue-200">
+    <div class="text-xs font-extrabold text-blue-700 uppercase px-2 pb-1.5 flex items-center justify-between flex-wrap gap-2">
+      <span>👇 THANH MENU MÔ PHỎNG Y HỆT ỨNG DỤNG THẬT (BẤM VÀO MỤC NÀO SẼ MỞ SLIDE HƯỚNG DẪN MỤC ĐÓ):</span>
+      <span id="currentHighlightHint" class="px-2.5 py-0.5 rounded bg-amber-100 text-amber-900 border border-amber-300 text-xs font-extrabold">Đang xem: Tổng quan & Đăng nhập</span>
+    </div>
+    <div class="flex flex-wrap items-center justify-between gap-2 pt-1.5 border-t border-slate-200">
+      <div class="flex flex-wrap items-center gap-1.5">
+        <button onclick="goToSlide(0)" id="nav-slide-0" class="app-top-tab active-highlight">
+          <span>🔐 0. Đăng Nhập & Phân Quyền</span>
+        </button>
+        <button onclick="goToSlide(1)" id="nav-slide-1" class="app-top-tab">
+          <span>📋 1. Nhiệm Vụ Hàng Ngày & Phát Sinh</span>
+          <span class="text-xs px-1.5 py-0.2 rounded-full bg-slate-200 text-slate-800 font-extrabold">Tab 1</span>
+        </button>
+        <button onclick="goToSlide(2)" id="nav-slide-2" class="app-top-tab">
+          <span>📦 6. Kho Video Drive & Chốt Ca</span>
+          <span class="text-xs px-1.5 py-0.2 rounded-full bg-emerald-100 text-emerald-800 font-extrabold">Tab 6</span>
+        </button>
+        <button onclick="goToSlide(3)" id="nav-slide-3" class="app-top-tab">
+          <span>📺 2 & 3. Quét Kênh, Bảo Mật & Kênh Chính</span>
+          <span class="text-xs px-1.5 py-0.2 rounded-full bg-blue-100 text-blue-800 font-extrabold">Tab 2 & 3</span>
+        </button>
+        <button onclick="goToSlide(4)" id="nav-slide-4" class="app-top-tab">
+          <span>💰 5. Doanh Thu, Phí Net & Bù Trừ Lỗ</span>
+          <span class="text-xs px-1.5 py-0.2 rounded-full bg-amber-100 text-amber-900 font-extrabold">Tab 5</span>
+        </button>
+        <button onclick="goToSlide(5)" id="nav-slide-5" class="app-top-tab">
+          <span>🗓️ Luồng Phối Hợp 1 Ngày</span>
+        </button>
+        <button onclick="goToSlide(6)" id="nav-slide-6" class="app-top-tab">
+          <span>🔑 Bàn Giao Tài Khoản</span>
+        </button>
+      </div>
+
+      <!-- Nút Chuông góc trên bên phải giống y hệt ứng dụng -->
+      <button onclick="goToSlide(7)" id="nav-slide-7" class="px-3 py-1.5 rounded-lg border-2 border-indigo-300 bg-indigo-50 hover:bg-indigo-100 text-indigo-950 text-xs font-extrabold flex items-center gap-1.5 shadow-sm">
+        <span>🔔 Thông báo (Góc trên phải)</span>
+        <span class="px-1.5 py-0.2 rounded-full bg-red-600 text-white text-xs font-extrabold">3</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- =================================================================== -->
+  <!-- NỘI DUNG TỪNG SLIDE (GIAO DIỆN SÁNG, CHỮ TO RÕ, GIỐNG HỆT APP)      -->
+  <!-- =================================================================== -->
+  <div class="max-w-7xl mx-auto">
+
+    <!-- ================================================================= -->
+    <!-- SLIDE 1 (index 0): TỔNG QUAN, ĐĂNG NHẬP & PHÂN QUYỀN 4 CẤP        -->
+    <!-- ================================================================= -->
+    <div id="slide-0" class="slide-pane space-y-4">
+      <div class="app-box p-5 bg-white">
+        <div class="flex flex-wrap items-center justify-between gap-2 pb-3 mb-4 border-b border-slate-200">
+          <div>
+            <span class="px-2.5 py-1 rounded bg-blue-100 text-blue-800 font-extrabold text-xs uppercase">TRANG 1 / 8 • BẮT ĐẦU SỬ DỤNG & PHÂN QUYỀN</span>
+            <h2 class="text-xl md:text-2xl font-extrabold text-slate-900 mt-1">1. Giao Diện Đăng Nhập & Phân Quyền 4 Cấp Trong Ứng Dụng</h2>
+          </div>
+          <div class="text-sm font-bold text-slate-600 bg-slate-100 px-3.5 py-2 rounded-xl border border-slate-300">
+            ☁️ Chạy Online 24/7 (Tắt máy Admin vẫn chạy) • Tự đồng bộ mỗi <strong>10 giây</strong>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
+          <!-- Bên trái: Mô phỏng y hệt Khung Đăng Nhập của App -->
+          <div class="lg:col-span-5 bg-slate-900 p-5 rounded-2xl border border-slate-300 shadow-inner">
+            <div class="bg-white rounded-xl p-5 border border-slate-200 space-y-3">
+              <div class="text-center space-y-1">
+                <div class="w-10 h-10 rounded-xl bg-blue-600 text-white font-extrabold text-base flex items-center justify-center mx-auto">YT</div>
+                <div class="text-base font-extrabold text-slate-900">Màn Hình Đăng Nhập Ứng Dụng</div>
+                <div class="text-xs text-slate-500">Bấm thử vào từng loại tài khoản bên dưới để xem người đó nhìn thấy gì:</div>
+              </div>
+
+              <div class="space-y-2 pt-1">
+                <button onclick="selectRoleDemo('ADMIN')" id="role-btn-ADMIN" class="w-full py-2.5 px-3.5 rounded-lg bg-amber-100 border-2 border-amber-500 text-amber-950 text-sm font-extrabold flex items-center justify-between">
+                  <span>👑 1. Tổng Admin (Chủ hệ thống)</span>
+                  <span class="text-xs bg-amber-300 px-2 py-0.5 rounded-full">admin / admin123</span>
+                </button>
+
+                <div class="grid grid-cols-2 gap-2">
+                  <button onclick="selectRoleDemo('MGR_STAFF')" id="role-btn-MGR_STAFF" class="py-2.5 px-3 rounded-lg bg-emerald-50 hover:bg-emerald-100 border border-emerald-300 text-emerald-950 text-xs font-extrabold text-left">
+                    <div>🛡️ 2A. QL Nhân Viên</div>
+                    <div class="text-xs text-emerald-700 font-mono mt-0.5">ql_nhanvien / 123456</div>
+                  </button>
+                  <button onclick="selectRoleDemo('MGR_PARTNER')" id="role-btn-MGR_PARTNER" class="py-2.5 px-3 rounded-lg bg-teal-50 hover:bg-teal-100 border border-teal-300 text-teal-950 text-xs font-extrabold text-left">
+                    <div>🛡️ 2B. QL Hợp Tác</div>
+                    <div class="text-xs text-teal-700 font-mono mt-0.5">ql_hoptac / 123456</div>
+                  </button>
+                </div>
+
+                <button onclick="selectRoleDemo('STAFF')" id="role-btn-STAFF" class="w-full py-2.5 px-3.5 rounded-lg bg-blue-50 hover:bg-blue-100 border border-blue-300 text-blue-950 text-sm font-extrabold flex items-center justify-between">
+                  <span>👨‍💻 3. Nhân Viên Cố Định (Hùng, Mai, Tuấn, Thảo)</span>
+                  <span class="text-xs bg-blue-200 px-2 py-0.5 rounded-full">Mật khẩu: 123</span>
+                </button>
+
+                <button onclick="selectRoleDemo('PARTNER')" id="role-btn-PARTNER" class="w-full py-2.5 px-3.5 rounded-lg bg-purple-50 hover:bg-purple-100 border border-purple-300 text-purple-950 text-sm font-extrabold flex items-center justify-between">
+                  <span>🤝 4. Người Hợp Tác (Nam, Quân)</span>
+                  <span class="text-xs bg-purple-200 px-2 py-0.5 rounded-full">Mật khẩu: 123</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bên phải: Giải thích rõ ràng, chữ to dễ đọc -->
+          <div class="lg:col-span-7 space-y-4">
+            <div id="roleDetailBox" class="p-5 rounded-2xl bg-slate-50 border-2 border-blue-200"></div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div class="p-3.5 rounded-xl bg-blue-50 border border-blue-200">
+                <div class="font-extrabold text-sm text-blue-900">🔒 Bảo mật tách biệt</div>
+                <p class="text-xs md:text-sm text-slate-700 mt-1 leading-relaxed">Ai đăng nhập chỉ thấy đúng kênh, nhiệm vụ và số tiền của người đó.</p>
+              </div>
+              <div class="p-3.5 rounded-xl bg-emerald-50 border border-emerald-200">
+                <div class="font-extrabold text-sm text-emerald-900">📂 Kho Drive Chung</div>
+                <p class="text-xs md:text-sm text-slate-700 mt-1 leading-relaxed">Nhân viên tải Video + Thumbnail + SEO trực tiếp không cần hỏi pass Gmail Admin.</p>
+              </div>
+              <div class="p-3.5 rounded-xl bg-amber-50 border border-amber-200">
+                <div class="font-extrabold text-sm text-amber-900">🛡️ Khóa Xóa Kênh Chính</div>
+                <p class="text-xs md:text-sm text-slate-700 mt-1 leading-relaxed">Kênh đã lên <strong>⭐ Kênh Chính</strong> thì Nhân viên hoàn toàn không thể bấm xóa.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================================================================= -->
+    <!-- SLIDE 2 (index 1): GIAO DIỆN TAB 1 (NHIỆM VỤ HÀNG NGÀY & PHÁT SINH) -->
+    <!-- ================================================================= -->
+    <div id="slide-1" class="slide-pane hidden space-y-4">
+      <div class="app-box p-5 bg-white">
+        <div class="flex flex-wrap items-center justify-between gap-2 pb-3 mb-4 border-b border-slate-200">
+          <div>
+            <span class="px-2.5 py-1 rounded bg-blue-100 text-blue-800 font-extrabold text-xs uppercase">TRANG 2 / 8 • HƯỚNG DẪN TAB 1 (DÀNH CHO NHÂN VIÊN & ĐỐI TÁC)</span>
+            <h2 class="text-xl md:text-2xl font-extrabold text-slate-900 mt-1">2. Màn Hình `📋 1. Nhiệm Vụ Hàng Ngày & Phát Sinh` (Nơi Làm Việc Mỗi Ngày)</h2>
+          </div>
+          <span class="px-3 py-1.5 rounded-lg bg-emerald-50 border border-emerald-300 text-emerald-900 text-xs md:text-sm font-extrabold">
+            Chia làm 2 Khung rõ ràng: Khung 1 (Việc Hàng Ngày) & Khung 2 (Việc Phát Sinh)
+          </span>
+        </div>
+
+        <!-- Mô phỏng trực quan Khung 1 & Khung 2 giống y hệt trong App -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+
+          <!-- KHUNG 1: NHIỆM VỤ HÀNG NGÀY -->
+          <div class="lg:col-span-7 rounded-2xl border-2 border-blue-400 bg-white overflow-hidden shadow-sm">
+            <div class="bg-blue-600 text-white px-4 py-3 flex items-center justify-between">
+              <div class="font-extrabold text-sm md:text-base">📋 KHUNG 1: NHIỆM VỤ HÀNG NGÀY (XẾP THEO KÊNH & VIDEO NHỎ)</div>
+              <span class="px-2.5 py-0.5 rounded-full bg-white text-blue-800 font-extrabold text-xs">Định mức: 2 Video/ngày</span>
+            </div>
+
+            <div class="p-4 space-y-3 bg-slate-50">
+              <!-- Thẻ kênh mẫu giống hệt app -->
+              <div class="p-4 rounded-xl bg-white border border-slate-300 space-y-3">
+                <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 pb-2.5">
+                  <div class="flex items-center gap-2">
+                    <span class="px-2 py-0.5 rounded bg-amber-100 text-amber-900 border border-amber-300 text-xs font-extrabold">⭐ KÊNH CHÍNH</span>
+                    <span class="font-extrabold text-base text-slate-900">📺 Kênh: AI Story US - Kênh 01</span>
+                  </div>
+                  <div class="flex items-center gap-1.5">
+                    <span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300 text-xs font-extrabold">📥 Kho Drive: 3 gói sẵn sàng</span>
+                    <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-800 border border-slate-300 text-xs font-bold">📝 Ghi chú kênh</span>
+                  </div>
+                </div>
+
+                <!-- Danh sách Video nhỏ #1, #2 -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div class="p-3 rounded-xl bg-emerald-50 border-2 border-emerald-400 space-y-2">
+                    <div class="flex items-center justify-between">
+                      <span class="font-extrabold text-sm text-emerald-950">🎬 Video nhỏ #1</span>
+                      <span class="px-2 py-0.5 rounded bg-emerald-600 text-white text-xs font-extrabold">✅ Đã Xong</span>
+                    </div>
+                    <div class="space-y-1 text-xs md:text-sm text-slate-800 font-medium">
+                      <div>☑️ 1. Tìm tiêu đề & tài nguyên</div>
+                      <div>☑️ 2. Tải lên & tối ưu SEO</div>
+                    </div>
+                  </div>
+
+                  <div class="p-3 rounded-xl bg-amber-50 border-2 border-amber-300 space-y-2">
+                    <div class="flex items-center justify-between">
+                      <span class="font-extrabold text-sm text-amber-950">🎬 Video nhỏ #2</span>
+                      <span class="px-2.5 py-0.5 rounded bg-blue-600 text-white text-xs font-extrabold">Bấm: ✅ Xong Video #2</span>
+                    </div>
+                    <div class="space-y-1 text-xs md:text-sm text-slate-800 font-medium">
+                      <div>☑️ 1. Tìm tiêu đề & tài nguyên</div>
+                      <div>⬜ 2. Tải lên & tối ưu SEO</div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 2 Việc chung bắt buộc cuối ngày -->
+                <div class="p-3 rounded-xl bg-blue-50 border border-blue-200 flex flex-wrap items-center justify-between gap-2 text-xs md:text-sm font-bold text-blue-950">
+                  <span>💬 Việc chung 1: Tương tác kênh (☑️ Đã tích)</span>
+                  <span class="px-2.5 py-1 rounded-lg bg-indigo-600 text-white font-extrabold">🌙 Việc chung 2: Treo tool chạy video qua ngày (Bắt buộc trước khi nghỉ)</span>
+                </div>
+              </div>
+
+              <!-- Chú thích bước làm -->
+              <div class="space-y-2 text-sm text-slate-800 bg-white p-3.5 rounded-xl border border-slate-200">
+                <div class="flex items-start gap-2.5">
+                  <span class="step-badge">1</span>
+                  <div><strong>Làm xong Video nhỏ nào tích ngay Video đó:</strong> Khi tích đủ 2 bước (hoặc lấy Video từ Kho Drive), hệ thống tự cộng số video đã đăng và <strong>báo ngay về Chuông góc phải của Admin/Quản lý</strong>.</div>
+                </div>
+                <div class="flex items-start gap-2.5">
+                  <span class="step-badge">2</span>
+                  <div><strong>Trước khi nghỉ cuối ngày:</strong> Bắt buộc kiểm tra đã tích <strong>🌙 Treo tool chạy video qua ngày</strong>. Nếu sau <code>16:00</code> chiều chưa tích, hệ thống sẽ tự động nhắc việc.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- KHUNG 2: NHIỆM VỤ PHÁT SINH & GHI CHÚ NHIỆM VỤ -->
+          <div class="lg:col-span-5 rounded-2xl border-2 border-indigo-400 bg-white overflow-hidden shadow-sm flex flex-col justify-between">
+            <div class="bg-indigo-600 text-white px-4 py-3 flex items-center justify-between">
+              <div class="font-extrabold text-sm md:text-base">⚡ KHUNG 2: NHIỆM VỤ PHÁT SINH</div>
+              <span class="px-2 py-0.5 rounded bg-white text-indigo-900 font-extrabold text-xs">+ Giao Việc Phát Sinh</span>
+            </div>
+
+            <div class="p-4 space-y-3 bg-slate-50 flex-1">
+              <!-- Thẻ nhiệm vụ phát sinh mẫu giống hệt app -->
+              <div class="p-4 rounded-xl bg-white border-2 border-indigo-200 space-y-2.5">
+                <div class="flex items-center justify-between">
+                  <span class="px-2 py-0.5 rounded bg-red-100 text-red-700 border border-red-300 text-xs font-extrabold">🔥 GẤP</span>
+                  <span class="text-xs font-bold text-slate-500">Giao cho: 👨‍💻 Nguyễn Văn Hùng</span>
+                </div>
+                <div class="font-extrabold text-base text-slate-900">Làm thêm 2 Thumbnail mới cho kênh AI Story US</div>
+                <div class="text-xs md:text-sm text-slate-600 bg-slate-100 p-2.5 rounded-lg">📌 Hướng dẫn: Lấy ảnh nhân vật rõ nét, chữ vàng nổi bật.</div>
+
+                <!-- Dòng hiển thị Ghi chú nhiệm vụ mới nâng cấp -->
+                <div class="p-2.5 rounded-lg bg-indigo-50 border border-indigo-200 text-xs md:text-sm text-indigo-950 font-semibold">
+                  📝 <strong>Ghi chú nhiệm vụ:</strong> Đã thiết kế xong 2 mẫu và đẩy lên thư mục Drive kênh.
+                </div>
+
+                <!-- 2 Nút thao tác chính của nhân viên -->
+                <div class="flex flex-wrap items-center gap-2 pt-1">
+                  <span class="px-3 py-1.5 rounded-lg bg-emerald-600 text-white font-extrabold text-xs md:text-sm shadow-sm">
+                    ☑️ Xong Hoàn Thành
+                  </span>
+                  <span class="px-3 py-1.5 rounded-lg bg-indigo-100 text-indigo-900 border border-indigo-300 font-extrabold text-xs md:text-sm">
+                    📝 Ghi chú nhiệm vụ
+                  </span>
+                </div>
+              </div>
+
+              <div class="space-y-2 text-sm text-slate-800 bg-white p-3.5 rounded-xl border border-slate-200">
+                <div class="flex items-start gap-2.5">
+                  <span class="step-badge">3</span>
+                  <div><strong>Nút `☑️ Xong Hoàn Thành`:</strong> Bấm ngay khi làm xong việc phát sinh để báo tự động cho Admin & Quản lý.</div>
+                </div>
+                <div class="flex items-start gap-2.5">
+                  <span class="step-badge">4</span>
+                  <div><strong>Nút `📝 Ghi chú nhiệm vụ`:</strong> Dùng để <strong>ghi chú kết quả khi xong việc</strong> hoặc <strong>ghi chú khó khăn / vướng mắc</strong> (Mở hộp nhập mượt ngay trong trang web, không bật popup Chrome).</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ================================================================= -->
+    <!-- SLIDE 3 (index 2): GIAO DIỆN TAB 6 (KHO VIDEO GOOGLE DRIVE & CHỐT CA) -->
+    <!-- ================================================================= -->
+    <div id="slide-2" class="slide-pane hidden space-y-4">
+      <div class="app-box p-5 bg-white">
+        <div class="flex flex-wrap items-center justify-between gap-2 pb-3 mb-4 border-b border-slate-200">
+          <div>
+            <span class="px-2.5 py-1 rounded bg-emerald-100 text-emerald-800 font-extrabold text-xs uppercase">TRANG 3 / 8 • HƯỚNG DẪN TAB 6 (KHO VIDEO GOOGLE DRIVE & CHỐT NGÀY)</span>
+            <h2 class="text-xl md:text-2xl font-extrabold text-slate-900 mt-1">3. Màn Hình `📦 6. Kho Video & Chấm Công` — Lấy Video 1 Chạm & Chốt Ca</h2>
+          </div>
+          <a href="https://drive.google.com/drive/folders/1VD8TwhwEM1142mdr493oycyZB5jtR4u9" target="_blank" class="px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-xs md:text-sm font-extrabold">
+            📂 Mở Kho Google Drive Thật
+          </a>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+          <!-- Bên trái: Quy trình 3 bước của Quản lý & Nhân viên trên Kho Drive -->
+          <div class="lg:col-span-6 space-y-3">
+            <div class="p-4 rounded-2xl bg-emerald-50 border-2 border-emerald-400 space-y-3">
+              <div class="font-extrabold text-base text-emerald-950 flex items-center justify-between">
+                <span>📦 CÁCH NẠP & LẤY GÓI VIDEO TỪ KHO GOOGLE DRIVE</span>
+                <span class="px-2 py-0.5 rounded bg-emerald-600 text-white text-xs">Tự động ghép 3 file</span>
+              </div>
+
+              <div class="p-3.5 rounded-xl bg-white border border-emerald-200 space-y-2 text-sm text-slate-800">
+                <div class="flex items-start gap-2.5">
+                  <span class="step-badge">1</span>
+                  <div>
+                    <strong>Quản lý / Editor đẩy 3 file cùng tên lên thư mục Drive của kênh:</strong><br/>
+                    Ví dụ: <code>Tap_01.mp4</code> (Video) + <code>Tap_01.png</code> (Thumbnail) + <code>Tap_01.txt</code> (File SEO gồm Tiêu đề, Mô tả, Tags).
+                  </div>
+                </div>
+                <div class="flex items-start gap-2.5">
+                  <span class="step-badge">2</span>
+                  <div>
+                    <strong>Bấm nút `🔄 Quét Kho Drive Thật` trong Tab 6:</strong><br/>
+                    Hệ thống tự động đọc Google Drive và gom 3 file trên thành <strong>1 Gói Video Dự Trữ hoàn chỉnh</strong>.
+                  </div>
+                </div>
+                <div class="flex items-start gap-2.5">
+                  <span class="step-badge">3</span>
+                  <div>
+                    <strong>Nhân viên bấm `📥 Lấy & Tải Video + Thumb + SEO`:</strong><br/>
+                    Hiện bảng tải trực tiếp như hình bên phải &rarr; Tải về đăng xong bấm <strong>`✅ Xác Nhận Đã Lấy Đăng`</strong> là tự động hoàn thành 1 Video nhỏ hôm nay!
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-4 rounded-2xl bg-slate-100 border border-slate-300 space-y-2 text-sm">
+              <div class="font-extrabold text-slate-900">📅 NÚT `✅ CHỐT NGÀY & SANG NGÀY MỚI` (DÀNH CHO ADMIN & 2 QUẢN LÝ):</div>
+              <p class="text-slate-700 leading-relaxed">
+                Cuối ngày, sau khi kiểm tra các kênh đã đăng đủ video và đã tích <em>Treo tool qua ngày</em>, Quản lý bấm nút <strong>`✅ Chốt Ngày & Sang Ngày Mới`</strong> để lưu kết quả vào <strong>Bảng Lịch Sử 30 Ngày</strong> và reset tiến độ video nhỏ về <code>0</code> cho ngày hôm sau.
+              </p>
+            </div>
+          </div>
+
+          <!-- Bên phải: Mô phỏng y hệt Hộp Thoại Lấy Video Từ Kho Drive trong App -->
+          <div class="lg:col-span-6 rounded-2xl border-2 border-slate-400 bg-white overflow-hidden shadow-md">
+            <div class="bg-slate-900 text-white px-4 py-3 flex items-center justify-between">
+              <span class="font-extrabold text-sm md:text-base">📥 HỘP THOẠI LẤY VIDEO KHO DRIVE (TRONG APP)</span>
+              <span class="text-xs bg-emerald-500 text-white px-2 py-0.5 rounded font-bold">Không cần đăng nhập Gmail Admin</span>
+            </div>
+            <div class="p-4 space-y-3 bg-white text-xs md:text-sm">
+              <div class="p-3 rounded-xl bg-blue-50 border border-blue-200 space-y-2">
+                <div class="font-extrabold text-blue-950 uppercase text-xs">BƯỚC 1: BẤM TẢI FILE VỀ MÁY TÍNH</div>
+                <div class="grid grid-cols-3 gap-2 text-center font-extrabold text-white">
+                  <div class="py-2 px-2 rounded-lg bg-blue-600">🎬 1. Tải Video (.MP4)</div>
+                  <div class="py-2 px-2 rounded-lg bg-purple-600">🖼️ 2. Tải Thumbnail</div>
+                  <div class="py-2 px-2 rounded-lg bg-slate-800">📄 3. Tải File SEO (.TXT)</div>
+                </div>
+              </div>
+
+              <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
+                <div class="font-extrabold text-slate-800 uppercase text-xs">BƯỚC 2: COPY 1 CHẠM DÁN VÀO YOUTUBE STUDIO</div>
+                <div class="flex items-center justify-between p-2 rounded bg-white border border-slate-200">
+                  <span class="font-bold text-slate-800 truncate">Tiêu đề: The Maid Served Coffee To A Ruthless Boss...</span>
+                  <span class="px-2 py-0.5 rounded bg-blue-100 text-blue-800 font-extrabold text-xs shrink-0">📋 Copy Tiêu Đề</span>
+                </div>
+                <div class="flex items-center justify-between p-2 rounded bg-white border border-slate-200">
+                  <span class="font-bold text-slate-800 truncate">Mô tả & Hashtags chuẩn SEO (#story #drama...)</span>
+                  <span class="px-2 py-0.5 rounded bg-blue-100 text-blue-800 font-extrabold text-xs shrink-0">📋 Copy Mô Tả</span>
+                </div>
+                <div class="flex items-center justify-between p-2 rounded bg-white border border-slate-200">
+                  <span class="font-bold text-slate-800 truncate">Từ khóa Tags: billionaire story, emotional justice...</span>
+                  <span class="px-2 py-0.5 rounded bg-blue-100 text-blue-800 font-extrabold text-xs shrink-0">📋 Copy Tags</span>
+                </div>
+              </div>
+
+              <div class="pt-2 border-t border-slate-200 flex items-center justify-between">
+                <span class="px-3 py-1.5 rounded-lg border border-slate-300 text-slate-600 font-bold text-xs">Đóng</span>
+                <span class="px-4 py-2 rounded-lg bg-emerald-600 text-white font-extrabold text-xs md:text-sm shadow">
+                  ✅ Xác Nhận Đã Lấy Đăng (Tự Tích Xong 1 Video Hôm Nay)
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================================================================= -->
+    <!-- SLIDE 4 (index 3): GIAO DIỆN TAB 2 & TAB 3 (QUÉT KÊNH & BẢO MẬT)   -->
+    <!-- ================================================================= -->
+    <div id="slide-3" class="slide-pane hidden space-y-4">
+      <div class="app-box p-5 bg-white">
+        <div class="flex flex-wrap items-center justify-between gap-2 pb-3 mb-4 border-b border-slate-200">
+          <div>
+            <span class="px-2.5 py-1 rounded bg-blue-100 text-blue-800 font-extrabold text-xs uppercase">TRANG 4 / 8 • HƯỚNG DẪN TAB 2 & TAB 3 (QUÉT KÊNH TỰ ĐỘNG & BẢO MẬT)</span>
+            <h2 class="text-xl md:text-2xl font-extrabold text-slate-900 mt-1">4. Màn Hình `📺 2. Quét Kênh` & `🔐 3. Gmail, 2FA & GA / Tên Net`</h2>
+          </div>
+          <span class="px-3 py-1.5 rounded-lg bg-blue-600 text-white text-xs md:text-sm font-extrabold">
+            🔄 Tự động quét Tổng Video / View / Sub (Khóa sửa tay 100%)
+          </span>
+        </div>
+
+        <!-- Mô phỏng Bảng Quét Kênh y hệt trong App -->
+        <div class="rounded-xl border border-slate-300 overflow-x-auto mb-4">
+          <table class="mock-table bg-white">
+            <thead>
+              <tr>
+                <th>Kênh & Chủ đề</th>
+                <th>Phân loại</th>
+                <th>Hình thức GA / Tên Net</th>
+                <th>Tổng Video / Views / Subs (Tự Quét)</th>
+                <th>Đánh giá tự động & Thao tác</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div class="font-extrabold text-slate-900">AI Story US - Kênh 01</div>
+                  <div class="text-xs text-slate-500">Phụ trách: 👨‍💻 Nguyễn Văn Hùng • Nuôi 45 ngày</div>
+                </td>
+                <td><span class="px-2.5 py-1 rounded bg-amber-100 text-amber-900 border border-amber-300 text-xs font-extrabold">⭐ Kênh Chính</span></td>
+                <td><span class="px-2.5 py-1 rounded bg-emerald-50 text-emerald-800 border border-emerald-300 text-xs font-extrabold">💳 Đánh GA (0% phí Net)</span></td>
+                <td>
+                  <div class="font-extrabold text-slate-900">68 Video • 142.500 Views • 3.200 Subs</div>
+                  <div class="text-xs text-blue-600 font-bold">🔒 Read-Only (Tự động cập nhật khi bấm 🔄 Quét)</div>
+                </td>
+                <td>
+                  <span class="px-2.5 py-1 rounded bg-slate-100 text-slate-700 border border-slate-300 text-xs font-extrabold">🛡️ Khóa Xóa (Bảo vệ Kênh Chính)</span>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="font-extrabold text-slate-900">JP Drama Manga - Kênh 02</div>
+                  <div class="text-xs text-slate-500">Phụ trách: 🤝 Hoàng Bảo Nam • Nuôi 18 ngày</div>
+                </td>
+                <td><span class="px-2.5 py-1 rounded bg-blue-50 text-blue-800 border border-blue-200 text-xs font-extrabold">🧪 Kênh Test</span></td>
+                <td><span class="px-2.5 py-1 rounded bg-orange-100 text-orange-900 border border-orange-300 text-xs font-extrabold">🌐 Net [Yeah1 Network]: -20%</span></td>
+                <td>
+                  <div class="font-extrabold text-emerald-700">24 Video • 19.800 Views • 610 Subs</div>
+                  <div class="text-xs text-emerald-600 font-bold">✅ Đạt mốc &ge; 15.000 Views!</div>
+                </td>
+                <td>
+                  <span class="px-3 py-1 rounded-lg bg-emerald-600 text-white text-xs font-extrabold shadow-sm">⬆️ Duyệt Lên Kênh Chính</span>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="font-extrabold text-slate-900">Mystery Doc - Kênh 03</div>
+                  <div class="text-xs text-slate-500">Phụ trách: 👨‍💻 Lê Minh Tuấn • Nuôi 35 ngày</div>
+                </td>
+                <td><span class="px-2.5 py-1 rounded bg-blue-50 text-blue-800 border border-blue-200 text-xs font-extrabold">🧪 Kênh Test</span></td>
+                <td><span class="px-2.5 py-1 rounded bg-emerald-50 text-emerald-800 border border-emerald-300 text-xs font-extrabold">💳 Đánh GA (0% phí Net)</span></td>
+                <td>
+                  <div class="font-extrabold text-red-600">32 Video • 2.100 Views • 45 Subs</div>
+                  <div class="text-xs text-red-600 font-bold">⚠️ Nuôi &ge; 30 ngày nhưng &lt; 5.000 Views</div>
+                </td>
+                <td>
+                  <span class="px-3 py-1 rounded-lg bg-red-600 text-white text-xs font-extrabold shadow-sm">🗑️ Bỏ Kênh & Tự Chuyển Kho Video</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- 3 quy tắc vàng ở Tab 2 & Tab 3 -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+          <div class="p-4 rounded-xl bg-blue-50 border border-blue-200 space-y-1">
+            <div class="font-extrabold text-blue-950">① Tự động Quét Video / View / Sub</div>
+            <p class="text-slate-700 leading-relaxed">Không ai sửa tay được số Video, View, Sub. Bấm nút <strong>`🔄 Quét Kênh`</strong> hệ thống sẽ tự lấy số thật từ YouTube về.</p>
+          </div>
+          <div class="p-4 rounded-xl bg-orange-50 border border-orange-200 space-y-1">
+            <div class="font-extrabold text-orange-950">② Bấm Nhãn Để Đặt Tên Net & `%` Net</div>
+            <p class="text-slate-700 leading-relaxed">Bấm thẳng vào nhãn <strong>`💳 Đánh GA`</strong> hoặc <strong>`🌐 Net [...]`</strong> để mở form chọn Tên Net (<code>Yeah1</code>, <code>Metub</code>, <code>Yoola</code>...) và `% Phí Net`.</p>
+          </div>
+          <div class="p-4 rounded-xl bg-emerald-50 border border-emerald-200 space-y-1">
+            <div class="font-extrabold text-emerald-950">③ Bảo Vệ Kênh Chính & Chuyển Kho</div>
+            <p class="text-slate-700 leading-relaxed">Kênh lên <strong>⭐ Kênh Chính</strong> sẽ khóa nút xóa với nhân viên. Kênh Test bị bỏ sẽ tự chuyển gói Video dự trữ sang kênh cùng chủ đề.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================================================================= -->
+    <!-- SLIDE 5 (index 4): GIAO DIỆN TAB 5 (LỢI NHUẬN THÁNG & BÙ TRỪ LỖ)   -->
+    <!-- ================================================================= -->
+    <div id="slide-4" class="slide-pane hidden space-y-4">
+      <div class="app-box p-5 bg-white">
+        <div class="flex flex-wrap items-center justify-between gap-2 pb-3 mb-4 border-b border-slate-200">
+          <div>
+            <span class="px-2.5 py-1 rounded bg-amber-100 text-amber-900 font-extrabold text-xs uppercase">TRANG 5 / 8 • HƯỚNG DẪN TAB 5 (CHỐT DOANH THU THÁNG, TRỪ NET & BÙ TRỪ LỖ)</span>
+            <h2 class="text-xl md:text-2xl font-extrabold text-slate-900 mt-1">5. Màn Hình `💰 5. Tài Nguyên & Lương` — Cách Tính Lãi / Lỗ & Bù Trừ Lỗ Từ Số 0</h2>
+          </div>
+          <span class="px-3 py-1.5 rounded-lg bg-amber-50 border border-amber-300 text-amber-950 text-xs md:text-sm font-extrabold">
+            💡 Thử đổi số liệu trong bảng bên dưới để xem ứng dụng tự tính ngay lập tức!
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+          <!-- Bên trái: Giải thích 3 quy tắc tính tiền rõ như ban ngày -->
+          <div class="lg:col-span-5 space-y-3 text-sm">
+            <div class="p-4 rounded-xl bg-blue-50 border border-blue-200 space-y-1.5">
+              <div class="font-extrabold text-blue-950 text-base">1️⃣ Tổng Thu Về Mỗi Kênh (Cuối Tháng Chốt)</div>
+              <p class="text-slate-700 leading-relaxed">
+                • <strong>Kênh Đánh GA:</strong> Phí Net = <code>0đ</code>.<br/>
+                • <strong>Kênh Join Net:</strong> Tự động trừ <code>% Phí Net</code> theo Tên Net.<br/>
+                • <strong>Nếu là Kênh Hợp Tác:</strong> Trừ tiếp <code>% của Người hợp tác</code> (Chi phí Tool đa phần người hợp tác tự bỏ nên không trừ vào tiền Team).
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-50 border border-emerald-200 space-y-1.5">
+              <div class="font-extrabold text-emerald-950 text-base">2️⃣ Lợi Nhuận Tháng Khối Nhân Viên</div>
+              <p class="text-slate-700 leading-relaxed">
+                <code>Lợi Nhuận Tháng = Tổng Thu Sau Net - Chi Phí Tool/Tài Nguyên - Chi Phí Nhân Viên (Lương cứng + Thưởng 5% sau Net) - Chi Phí Khác</code>.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-rose-50 border border-rose-200 space-y-1.5">
+              <div class="font-extrabold text-rose-950 text-base">3️⃣ Ghi Nhận Tháng Lỗ (`< 0đ`) & Tự Động Bù Trừ</div>
+              <p class="text-slate-700 leading-relaxed">
+                Vì bắt đầu từ con số 0, tháng nào thu chưa đủ chi phí sẽ ghi nhận <strong>số âm (📉 LỖ)</strong> và tự động lưu lại để <strong>bù trừ vào lợi nhuận của các tháng tiếp theo</strong>, đồng thời tính tổng cộng lũy kế.
+              </p>
+            </div>
+          </div>
+
+          <!-- Bên phải: Mô phỏng Bảng Nhập & Tính Thử Lãi/Lỗ y hệt Tab 5 -->
+          <div class="lg:col-span-7 rounded-2xl border-2 border-slate-300 bg-slate-50 p-4 space-y-3">
+            <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+              <span class="font-extrabold text-sm md:text-base text-slate-900">📅 BẢNG MÔ PHỎNG TÍNH NHANH LỢI NHUẬN & BÙ TRỪ LỖ (TAB 5)</span>
+              <span class="px-2.5 py-0.5 rounded bg-blue-600 text-white text-xs font-bold">Tương tác trực tiếp</span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs md:text-sm">
+              <div class="bg-white p-3 rounded-xl border border-slate-300">
+                <label class="block font-extrabold text-slate-700 mb-1">💵 1. Tổng Doanh Thu Gross Tháng (VNĐ):</label>
+                <input id="simGross" type="number" value="40000000" step="1000000" oninput="runFinanceSim()" class="w-full px-3 py-2 rounded-lg border-2 border-blue-300 font-extrabold text-slate-900 text-sm" />
+              </div>
+
+              <div class="bg-white p-3 rounded-xl border border-slate-300">
+                <label class="block font-extrabold text-slate-700 mb-1">🌐 2. Hình Thức Đánh GA / Join Net:</label>
+                <select id="simNetPct" onchange="runFinanceSim()" class="w-full px-3 py-2 rounded-lg border-2 border-orange-300 font-extrabold text-slate-900 text-sm">
+                  <option value="0">💳 Đánh GA Trực Tiếp (0% Phí Net)</option>
+                  <option value="15">🌐 Join Net [Metub] (-15% Phí Net)</option>
+                  <option value="20" selected>🌐 Join Net [Yeah1 Network] (-20% Phí Net)</option>
+                  <option value="25">🌐 Join Net [Yoola] (-25% Phí Net)</option>
+                  <option value="30">🌐 Join Net [MCN Khác] (-30% Phí Net)</option>
+                </select>
+              </div>
+
+              <div class="bg-white p-3 rounded-xl border border-slate-300">
+                <label class="block font-extrabold text-slate-700 mb-1">👥 3. Loại Hình Vận Hành Kênh:</label>
+                <select id="simOwnerType" onchange="runFinanceSim()" class="w-full px-3 py-2 rounded-lg border border-slate-300 font-extrabold text-slate-900 text-sm">
+                  <option value="STAFF" selected>👨‍💻 Khối Nhân Viên (Trừ Lương + 5% + Tool)</option>
+                  <option value="PARTNER">🤝 Khối Hợp Tác (Trừ % Đối tác ăn chia)</option>
+                </select>
+              </div>
+
+              <div class="bg-white p-3 rounded-xl border border-slate-300">
+                <label class="block font-extrabold text-slate-700 mb-1">🛠️ 4. Chi Phí Tool/Tài Nguyên + Khác (VNĐ):</label>
+                <input id="simToolCost" type="number" value="5000000" step="500000" oninput="runFinanceSim()" class="w-full px-3 py-2 rounded-lg border border-slate-300 font-extrabold text-slate-900 text-sm" />
+              </div>
+
+              <div class="bg-white p-3 rounded-xl border border-slate-300">
+                <label class="block font-extrabold text-slate-700 mb-1">💰 5. Lương Cứng NV (hoặc % Chia Đối Tác):</label>
+                <input id="simStaffOrPartnerVal" type="number" value="18000000" step="1000000" oninput="runFinanceSim()" class="w-full px-3 py-2 rounded-lg border border-slate-300 font-extrabold text-slate-900 text-sm" />
+              </div>
+
+              <div class="bg-white p-3 rounded-xl border border-slate-300">
+                <label class="block font-extrabold text-slate-700 mb-1">🔄 6. Lỗ/Lãi Tháng Trước Chuyển Sang (VNĐ):</label>
+                <input id="simPrevCarry" type="number" value="-8000000" step="1000000" oninput="runFinanceSim()" class="w-full px-3 py-2 rounded-lg border border-rose-300 font-extrabold text-rose-700 text-sm" />
+              </div>
+            </div>
+
+            <div id="simResultBox" class="pt-1"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================================================================= -->
+    <!-- SLIDE 6 (index 5): LUỒNG PHỐI HỢP 1 NGÀY LÀM VIỆC CHUẨN            -->
+    <!-- ================================================================= -->
+    <div id="slide-5" class="slide-pane hidden space-y-4">
+      <div class="app-box p-5 bg-white">
+        <div class="flex flex-wrap items-center justify-between gap-2 pb-3 mb-4 border-b border-slate-200">
+          <div>
+            <span class="px-2.5 py-1 rounded bg-emerald-100 text-emerald-800 font-extrabold text-xs uppercase">TRANG 6 / 8 • SƠ ĐỒ QUY TRÌNH 1 NGÀY LÀM VIỆC CHUẨN</span>
+            <h2 class="text-xl md:text-2xl font-extrabold text-slate-900 mt-1">6. Tóm Tắt Quy Trình Phối Hợp Trong 1 Ngày (Từ Sáng Đến Cuối Ngày)</h2>
+          </div>
+          <span class="text-xs md:text-sm font-bold text-slate-600">Ai làm việc gì ở khung giờ nào đều rõ ràng trên ứng dụng</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div class="p-4 rounded-2xl bg-blue-50 border-2 border-blue-300 space-y-2.5">
+            <div class="flex items-center justify-between">
+              <span class="px-2.5 py-1 rounded-lg bg-blue-600 text-white font-extrabold text-xs">BUỔI SÁNG (08:00)</span>
+              <span class="text-xl">🌅</span>
+            </div>
+            <h3 class="font-extrabold text-base text-blue-950">1. Nạp Kho & Giao Việc</h3>
+            <ul class="space-y-2 text-xs md:text-sm text-slate-800 list-disc pl-4 leading-relaxed">
+              <li><strong>Quản lý:</strong> Tải Video + Thumb + SEO lên Google Drive & bấm <code>🔄 Quét Kho Drive Thật</code> ở Tab 6.</li>
+              <li><strong>Quản lý:</strong> Bấm <code>+ Giao Việc Phát Sinh</code> nếu có việc gấp.</li>
+              <li><strong>Nhân viên:</strong> Nhìn <code>🔔 Thông báo</code> góc trên phải để nhận việc mới.</li>
+            </ul>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-emerald-50 border-2 border-emerald-300 space-y-2.5">
+            <div class="flex items-center justify-between">
+              <span class="px-2.5 py-1 rounded-lg bg-emerald-600 text-white font-extrabold text-xs">TRONG NGÀY</span>
+              <span class="text-xl">☀️</span>
+            </div>
+            <h3 class="font-extrabold text-base text-emerald-950">2. Lấy Kho & Đăng Video</h3>
+            <ul class="space-y-2 text-xs md:text-sm text-slate-800 list-disc pl-4 leading-relaxed">
+              <li><strong>Nhân viên / Đối tác:</strong> Mở Tab 6 bấm <code>📥 Lấy & Tải Video + Thumb + SEO</code> để đăng lên kênh.</li>
+              <li>Đăng xong bấm <code>✅ Xong Video #1, #2...</code> ở Tab 1.</li>
+              <li>Xong việc phát sinh bấm <code>☑️ Xong Hoàn Thành</code> & ghi <code>📝 Ghi chú nhiệm vụ</code>.</li>
+            </ul>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-amber-50 border-2 border-amber-300 space-y-2.5">
+            <div class="flex items-center justify-between">
+              <span class="px-2.5 py-1 rounded-lg bg-amber-600 text-white font-extrabold text-xs">CUỐI CHIỀU (16:00+)</span>
+              <span class="text-xl">🌇</span>
+            </div>
+            <h3 class="font-extrabold text-base text-amber-950">3. Nhắc Cuối Ngày & Treo Tool</h3>
+            <ul class="space-y-2 text-xs md:text-sm text-slate-800 list-disc pl-4 leading-relaxed">
+              <li><strong>Tự động lúc 16:00:</strong> Ai chưa đủ video hoặc chưa treo tool sẽ nhận cảnh báo tự động ở góc trên bên phải.</li>
+              <li><strong>Nhân viên / Đối tác:</strong> Bắt buộc tích đủ <code>💬 Tương tác kênh</code> & <code>🌙 Treo tool chạy video qua ngày</code> trước khi nghỉ.</li>
+            </ul>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-purple-50 border-2 border-purple-300 space-y-2.5">
+            <div class="flex items-center justify-between">
+              <span class="px-2.5 py-1 rounded-lg bg-purple-600 text-white font-extrabold text-xs">CUỐI NGÀY (TỐI)</span>
+              <span class="text-xl">🌙</span>
+            </div>
+            <h3 class="font-extrabold text-base text-purple-950">4. Quét Kênh & Chốt Ca</h3>
+            <ul class="space-y-2 text-xs md:text-sm text-slate-800 list-disc pl-4 leading-relaxed">
+              <li><strong>Admin / Quản lý:</strong> Bấm <code>🔄 Quét Kênh</code> ở Tab 2 để cập nhật Tổng Video, Views, Subs thật.</li>
+              <li><strong>Admin / Quản lý:</strong> Bấm <code>✅ Chốt Ngày & Sang Ngày Mới</code> ở Tab 6 để lưu Lịch sử 30 ngày.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================================================================= -->
+    <!-- SLIDE 7 (index 6): BÀN GIAO TÀI KHOẢN & GỬI NHÓM CHAT              -->
+    <!-- ================================================================= -->
+    <div id="slide-6" class="slide-pane hidden space-y-4">
+      <div class="app-box p-5 bg-white">
+        <div class="flex flex-wrap items-center justify-between gap-2 pb-3 mb-4 border-b border-slate-200">
+          <div>
+            <span class="px-2.5 py-1 rounded bg-emerald-100 text-emerald-800 font-extrabold text-xs uppercase">TRANG 7 / 8 • DANH SÁCH TÀI KHOẢN BÀN GIAO CHO TEAM</span>
+            <h2 class="text-xl md:text-2xl font-extrabold text-slate-900 mt-1">7. Bảng Tài Khoản Đăng Nhập & Link Gửi Cho Toàn Đội Ngũ</h2>
+          </div>
+          <button onclick="copyAllTeamAccounts()" id="btnCopyAllAcc" class="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs md:text-sm shadow">
+            📋 Copy Toàn Bộ Link & Tài Khoản Gửi Nhóm Zalo / Telegram
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-300 space-y-2.5">
+            <div class="font-extrabold text-base text-slate-900">👑 Khối Quản Trị & 2 Quản Lý Chuyên Biệt</div>
+            <div class="p-3 rounded-xl bg-white border border-amber-300 flex items-center justify-between">
+              <div>
+                <div class="font-extrabold text-slate-900">👑 Tổng Admin (Chủ hệ thống)</div>
+                <div class="text-xs text-slate-500">Toàn quyền Hệ thống, Tài chính & Đổi mật khẩu Admin</div>
+              </div>
+              <code class="px-3 py-1 rounded bg-amber-100 text-amber-950 font-extrabold">admin / admin123</code>
+            </div>
+            <div class="p-3 rounded-xl bg-white border border-emerald-300 flex items-center justify-between">
+              <div>
+                <div class="font-extrabold text-slate-900">🛡️ Quản Lý Nhân Viên</div>
+                <div class="text-xs text-slate-500">Quản lý toàn bộ đội Nhân viên cố định (STAFF)</div>
+              </div>
+              <code class="px-3 py-1 rounded bg-emerald-100 text-emerald-950 font-extrabold">ql_nhanvien / 123456</code>
+            </div>
+            <div class="p-3 rounded-xl bg-white border border-teal-300 flex items-center justify-between">
+              <div>
+                <div class="font-extrabold text-slate-900">🛡️ Quản Lý Hợp Tác</div>
+                <div class="text-xs text-slate-500">Quản lý đội Người hợp tác + Giao việc cho Nhân viên</div>
+              </div>
+              <code class="px-3 py-1 rounded bg-teal-100 text-teal-950 font-extrabold">ql_hoptac / 123456</code>
+            </div>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-300 space-y-2.5">
+            <div class="font-extrabold text-base text-slate-900">👨‍💻 Khối Nhân Viên Cố Định & 🤝 Người Hợp Tác</div>
+            <div class="p-3 rounded-xl bg-white border border-blue-300 flex items-center justify-between">
+              <div>
+                <div class="font-extrabold text-slate-900">👨‍💻 4 Nhân Viên Cố Định</div>
+                <div class="text-xs text-slate-500">Nguyễn Văn Hùng, Trần Thị Mai, Lê Minh Tuấn, Phạm Phương Thảo</div>
+              </div>
+              <code class="px-3 py-1 rounded bg-blue-100 text-blue-950 font-extrabold">hung, mai, tuan, thao / 123</code>
+            </div>
+            <div class="p-3 rounded-xl bg-white border border-purple-300 flex items-center justify-between">
+              <div>
+                <div class="font-extrabold text-slate-900">🤝 2 Người Hợp Tác</div>
+                <div class="text-xs text-slate-500">Hoàng Bảo Nam, Đặng Minh Quân</div>
+              </div>
+              <code class="px-3 py-1 rounded bg-purple-100 text-purple-950 font-extrabold">nam, quan / 123</code>
+            </div>
+            <div class="p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-xs md:text-sm text-emerald-950 font-semibold">
+              💡 <strong>Hướng dẫn bảo mật cá nhân:</strong> Sau khi đăng nhập lần đầu, mỗi Nhân viên / Đối tác vào mục <strong>`👥 4. Tài Khoản Của Tôi`</strong> để tự đổi mật khẩu riêng của mình.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================================================================= -->
+    <!-- SLIDE 8 (index 7): MÔ PHỎNG CHUÔNG THÔNG BÁO GÓC TRÊN PHẢI & AI    -->
+    <!-- ================================================================= -->
+    <div id="slide-7" class="slide-pane hidden space-y-4">
+      <div class="app-box p-5 bg-white">
+        <div class="flex flex-wrap items-center justify-between gap-2 pb-3 mb-4 border-b border-slate-200">
+          <div>
+            <span class="px-2.5 py-1 rounded bg-indigo-100 text-indigo-900 font-extrabold text-xs uppercase">TRANG 8 / 8 • HƯỚNG DẪN CHUÔNG THÔNG BÁO GÓC TRÊN PHẢI & TRỢ LÝ AI</span>
+            <h2 class="text-xl md:text-2xl font-extrabold text-slate-900 mt-1">8. Chuông `🔔 Thông báo` Góc Trên Bên Phải (Không Bật Popup Chặn Của Chrome)</h2>
+          </div>
+          <span class="px-3 py-1.5 rounded-lg bg-indigo-50 border border-indigo-300 text-indigo-950 text-xs md:text-sm font-extrabold">
+            ✨ Đã tắt 100% bảng hỏi Allow / Block / Yes / Cancel của Chrome
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
+          <!-- Bên trái: Giải thích 2 chiều thông báo -->
+          <div class="lg:col-span-6 space-y-3 text-sm">
+            <div class="p-4 rounded-2xl bg-indigo-50 border-2 border-indigo-300 space-y-2">
+              <div class="font-extrabold text-base text-indigo-950">🔔 1. Chuông Nằm Gọn Ở Góc Trên Bên Phải Màn Hình</div>
+              <p class="text-slate-700 leading-relaxed">
+                Khi có thông báo mới, ứng dụng chỉ hiện <strong>Thẻ thông báo nhỏ tự đóng sau 3.5 giây ở góc trên bên phải</strong> kèm tiếng chuông nhẹ — hoàn toàn không làm gián đoạn công việc và <strong>không bao giờ bắt bấm Allow hay Block trên Chrome</strong>.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-2xl bg-emerald-50 border border-emerald-300 space-y-2">
+              <div class="font-extrabold text-base text-emerald-950">👨‍💻🤝 &rarr; 👑🛡️ 2. Tự Động Báo Khi Nhân Sự Xong Việc</div>
+              <p class="text-slate-700 leading-relaxed">
+                Mỗi khi Nhân viên hoặc Người hợp tác bấm <strong>Xong Video nhỏ</strong>, lấy <strong>Video Kho Drive</strong>, tích <strong>Treo tool qua đêm</strong>, bấm <strong>Xong Việc Phát Sinh</strong> hoặc cập nhật <strong>Ghi chú nhiệm vụ</strong>, thông báo sẽ gửi ngay về Chuông của Admin và Quản lý phụ trách.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-2xl bg-amber-50 border border-amber-300 space-y-2">
+              <div class="font-extrabold text-base text-amber-950">👑🛡️ &rarr; 👨‍💻🤝 3. Tự Động Nhắc Lúc 16:00 & Nhắc Nhanh 1 Chạm</div>
+              <p class="text-slate-700 leading-relaxed">
+                Từ <code>16:00</code> chiều, hệ thống tự động báo nhắc những người còn việc chưa xong. Admin/Quản lý cũng có nút <strong>`⏰ Nhắc tất cả người chưa xong`</strong> ngay trong bảng chuông góc phải.
+              </p>
+            </div>
+          </div>
+
+          <!-- Bên phải: Mô phỏng y hệt Bảng Dropdown Thông Báo Góc Trên Phải -->
+          <div class="lg:col-span-6 rounded-2xl border-2 border-slate-400 bg-white overflow-hidden shadow-lg">
+            <div class="p-3.5 bg-slate-900 text-white flex items-center justify-between">
+              <div>
+                <div class="font-extrabold text-sm flex items-center gap-2">
+                  <span>🔔 Thông Báo & Nhắc Việc (Góc Trên Phải)</span>
+                  <span class="px-2 py-0.5 rounded bg-blue-600 text-xs">Admin / Quản lý</span>
+                </div>
+                <div class="text-xs text-slate-300 mt-0.5">Tự động báo việc phát sinh, nhắc cuối ngày & báo khi xong việc</div>
+              </div>
+              <span class="px-2 py-1 rounded bg-white/15 text-xs font-bold">✓ Đã đọc hết</span>
+            </div>
+
+            <!-- Khung tóm tắt tiến độ nằm gọn bên trong bảng chuông -->
+            <div class="p-3 bg-slate-50 border-b border-slate-200 space-y-2 text-xs md:text-sm">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <span class="font-extrabold text-slate-800">📊 Tiến độ hôm nay: <span class="text-emerald-700">4/6 xong</span> • <span class="text-amber-700">2 chưa xong</span></span>
+                <span class="px-2.5 py-1 rounded bg-red-600 text-white font-extrabold text-xs">⏰ Nhắc tất cả (2)</span>
+              </div>
+              <div class="flex gap-1.5">
+                <input type="text" readonly value="Nhớ tích treo tool chạy video qua đêm trước 17h30 nhé!" class="flex-1 px-2.5 py-1.5 rounded border border-slate-300 bg-white text-xs text-slate-700" />
+                <span class="px-3 py-1.5 rounded bg-indigo-600 text-white font-extrabold text-xs">📢 Gửi</span>
+              </div>
+            </div>
+
+            <!-- Danh sách thông báo mẫu giống hệt trong app -->
+            <div class="divide-y divide-slate-200 text-xs md:text-sm">
+              <div class="p-3.5 bg-emerald-50/60 flex items-start gap-2.5">
+                <span class="text-base">✅</span>
+                <div class="flex-1">
+                  <div class="font-extrabold text-slate-900">Xong Video Nhỏ #2 (2/2) — AI Story US - Kênh 01</div>
+                  <div class="text-slate-700 mt-0.5">Nguyễn Văn Hùng vừa bấm Xong Hoàn Thành Video nhỏ #2 (Tiến độ hôm nay: 2/2).</div>
+                </div>
+              </div>
+              <div class="p-3.5 bg-white flex items-start gap-2.5">
+                <span class="text-base">🌙</span>
+                <div class="flex-1">
+                  <div class="font-extrabold text-slate-900">Đã Treo Tool Qua Ngày — Kênh "AI Story US - Kênh 01"</div>
+                  <div class="text-slate-700 mt-0.5">Nguyễn Văn Hùng vừa tích hoàn thành "Việc chung 2: Treo tool chạy video qua ngày".</div>
+                </div>
+              </div>
+              <div class="p-3.5 bg-amber-50/60 flex items-start gap-2.5">
+                <span class="text-base">📝</span>
+                <div class="flex-1">
+                  <div class="font-extrabold text-slate-900">Ghi Chú Nhiệm Vụ Phát Sinh (Trần Thị Mai)</div>
+                  <div class="text-slate-700 mt-0.5">Trần Thị Mai vừa cập nhật ghi chú: "Đã tải xong 3 gói video mới lên kho Drive".</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const slideHintLabels = [
+      'Đang xem: 0. Đăng nhập & Phân quyền 4 cấp độ',
+      'Đang xem: 📋 Tab 1 — Nhiệm Vụ Hàng Ngày & Nhiệm Vụ Phát Sinh',
+      'Đang xem: 📦 Tab 6 — Kho Video Google Drive & Chốt Ca',
+      'Đang xem: 📺 Tab 2 & 3 — Quét Kênh Tự Động & Bảo Vệ Kênh Chính',
+      'Đang xem: 💰 Tab 5 — Doanh Thu Tháng, Trừ Phí Net & Bù Trừ Lỗ',
+      'Đang xem: 🗓️ Sơ Đồ Phối Hợp 1 Ngày Làm Việc Chuẩn',
+      'Đang xem: 🔑 Bảng Tài Khoản Bàn Giao Cho Team',
+      'Đang xem: 🔔 Chuông Thông Báo Góc Trên Phải & Trợ Lý AI'
+    ];
+
+    let currentSlide = 0;
+
+    function goToSlide(idx) {
+      const total = slideHintLabels.length;
+      currentSlide = (idx + total) % total;
+      for (let i = 0; i < total; i++) {
+        const pane = document.getElementById(`slide-${i}`);
+        if (pane) pane.classList.toggle('hidden', i !== currentSlide);
+        const navBtn = document.getElementById(`nav-slide-${i}`);
+        if (navBtn && i !== 7) {
+          navBtn.className = (i === currentSlide) ? 'app-top-tab active-highlight' : 'app-top-tab';
+        }
+      }
+      const bellBtn = document.getElementById('nav-slide-7');
+      if (bellBtn) {
+        bellBtn.className = (currentSlide === 7)
+          ? 'px-3 py-1.5 rounded-lg border-2 border-indigo-600 bg-indigo-600 text-white text-xs font-extrabold flex items-center gap-1.5 shadow'
+          : 'px-3 py-1.5 rounded-lg border-2 border-indigo-300 bg-indigo-50 hover:bg-indigo-100 text-indigo-950 text-xs font-extrabold flex items-center gap-1.5 shadow-sm';
+      }
+      document.getElementById('slideCounterBadge').textContent = `Trang ${currentSlide + 1} / ${total}`;
+      document.getElementById('currentHighlightHint').textContent = slideHintLabels[currentSlide];
+    }
+
+    function nextSlide() { goToSlide(currentSlide + 1); }
+    function prevSlide() { goToSlide(currentSlide - 1); }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT')) return;
+      if (e.key === 'ArrowRight') nextSlide();
+      if (e.key === 'ArrowLeft') prevSlide();
+    });
+
+    const roleData = {
+      ADMIN: {
+        badge: '👑 1. TỔNG ADMIN (CHỦ HỆ THỐNG)',
+        acc: 'Tài khoản: admin | Mật khẩu: admin123',
+        scope: 'Nhìn thấy 100% toàn bộ hệ thống (Cả 2 Quản lý, 4 Nhân viên cố định và các Người hợp tác).',
+        can: [
+          'Toàn quyền Tạo/Sửa/Xóa kênh, Duyệt Kênh Chính và cấu hình Đánh GA (0%) hoặc Join Net (Tên Net + % Phí Net).',
+          'Chốt Doanh thu & Chi phí vào cuối tháng tại Tab 5, theo dõi Sổ Bù Trừ Lỗ Lũy Kế từ con số 0 và xuất file Excel (.CSV).',
+          'Cấp tài khoản mới, đổi mật khẩu cho mọi nhân sự và đổi mật khẩu riêng của Tổng Admin tại Tab 4.'
+        ]
+      },
+      MGR_STAFF: {
+        badge: '🛡️ 2A. QUẢN LÝ NHÂN VIÊN (MGR_STAFF)',
+        acc: 'Tài khoản: ql_nhanvien | Mật khẩu: 123456',
+        scope: 'Chỉ nhìn thấy và quản lý đội Nhân viên cố định (STAFF). Hoàn toàn không nhìn thấy kênh hay doanh thu của Người hợp tác.',
+        can: [
+          'Giao việc phát sinh, nhắc việc 1 chạm ở Chuông góc trên phải, xem Gmail/2FA và duyệt Kênh Chính cho đội Nhân viên.',
+          'Quét Kho Video Google Drive thật và bấm Chốt Ngày vào Lịch sử 30 ngày cho khối Nhân viên.',
+          'Quản lý bảng lương cứng, thưởng 5% sau Net và chi phí Tool cấp cho Nhân viên tại Tab 5.'
+        ]
+      },
+      MGR_PARTNER: {
+        badge: '🛡️ 2B. QUẢN LÝ HỢP TÁC (MGR_PARTNER)',
+        acc: 'Tài khoản: ql_hoptac | Mật khẩu: 123456',
+        scope: 'Quản lý toàn bộ đội Người hợp tác (PARTNER) + Được quyền Giao việc phát sinh cho cả Nhân viên cố định.',
+        can: [
+          'Quản lý kênh, Gmail/2FA, duyệt Kênh Chính và bảng chia % lợi nhuận của các Người hợp tác.',
+          'Trong hộp thoại "+ Giao Việc Phát Sinh": chọn giao việc được cho cả Người hợp tác lẫn Nhân viên cố định.',
+          'Nhận thông báo thời gian thực ở góc trên phải khi Người hợp tác hoàn thành video hoặc ghi chú nhiệm vụ.'
+        ]
+      },
+      STAFF: {
+        badge: '👨‍💻 3. NHÂN VIÊN CỐ ĐỊNH (STAFF)',
+        acc: 'Tài khoản: hung, mai, tuan, thao | Mật khẩu: 123',
+        scope: 'Chỉ nhìn thấy duy nhất Kênh và Nhiệm vụ của chính mình (Không thấy kênh hay lương của người khác).',
+        can: [
+          'Hàng ngày vào Tab 1 tích từng Video nhỏ (#1, #2...), tích Tương tác kênh và tích Treo tool chạy video qua ngày.',
+          'Vào Tab 6 bấm "📥 Lấy & Tải Video + Thumb + SEO" từ Kho Google Drive về đăng lên kênh.',
+          'Bấm "☑️ Xong Hoàn Thành" và ghi "📝 Ghi chú nhiệm vụ" ở Khung 2. (Bị khóa nút xóa đối với ⭐ Kênh Chính).'
+        ]
+      },
+      PARTNER: {
+        badge: '🤝 4. NGƯỜI HỢP TÁC (PARTNER)',
+        acc: 'Tài khoản: nam, quan | Mật khẩu: 123',
+        scope: 'Chỉ nhìn thấy Kênh hợp tác, Nhiệm vụ và duy nhất dòng Đối Soát Chia % của chính mình ở Tab 5.',
+        can: [
+          'Tích hoàn thành định mức video hàng ngày + Treo tool qua đêm trên các kênh hợp tác của mình.',
+          'Xem minh bạch tại Tab 5: Doanh thu Gross tháng -> Trừ Phí Net (nếu Join Net) -> Số tiền nhận về theo % ăn chia.',
+          'Hoàn toàn không nhìn thấy doanh thu của Team hay của các Người hợp tác khác.'
+        ]
+      }
+    };
+
+    function selectRoleDemo(roleKey) {
+      const info = roleData[roleKey];
+      document.getElementById('roleDetailBox').innerHTML = `
+        <div class="space-y-3">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 pb-2.5">
+            <span class="font-extrabold text-base md:text-lg text-blue-900">${info.badge}</span>
+            <span class="px-3 py-1 rounded-lg bg-white border border-slate-300 text-xs md:text-sm font-mono font-extrabold text-slate-900">${info.acc}</span>
+          </div>
+          <div class="text-sm text-slate-800 leading-relaxed">
+            <strong class="text-emerald-700">👁️ Phạm vi nhìn thấy trên ứng dụng:</strong> ${info.scope}
+          </div>
+          <div class="space-y-1.5">
+            <div class="text-xs font-extrabold uppercase text-slate-500">✅ Các thao tác được phép thực hiện:</div>
+            <ul class="space-y-1.5 text-sm text-slate-800 list-disc pl-5 leading-relaxed">
+              ${info.can.map(item => `<li>${item}</li>`).join('')}
+            </ul>
+          </div>
+        </div>
+      `;
+    }
+
+    function runFinanceSim() {
+      const gross = Math.max(0, parseInt(document.getElementById('simGross').value, 10) || 0);
+      const netPct = parseFloat(document.getElementById('simNetPct').value) || 0;
+      const ownerType = document.getElementById('simOwnerType').value;
+      const toolCost = Math.max(0, parseInt(document.getElementById('simToolCost').value, 10) || 0);
+      const staffOrPartnerVal = Math.max(0, parseFloat(document.getElementById('simStaffOrPartnerVal').value) || 0);
+      const prevCarry = parseInt(document.getElementById('simPrevCarry').value, 10) || 0;
+
+      const netFee = Math.round(gross * (netPct / 100));
+      const revAfterNet = Math.max(0, gross - netFee);
+
+      let monthlyProfit = 0;
+      let explainLine = '';
+
+      if (ownerType === 'STAFF') {
+        const bonus5 = Math.round(revAfterNet * 0.05);
+        const fixedSalary = Math.round(staffOrPartnerVal);
+        monthlyProfit = revAfterNet - toolCost - fixedSalary - bonus5;
+        explainLine = `Trừ Lương cứng NV (-${fixedSalary.toLocaleString('vi-VN')}đ) • Trừ Thưởng 5% sau Net (-${bonus5.toLocaleString('vi-VN')}đ) • Trừ Tool/CP khác (-${toolCost.toLocaleString('vi-VN')}đ)`;
+      } else {
+        const sharePct = Math.min(95, staffOrPartnerVal > 100 ? 40 : staffOrPartnerVal);
+        const netForShare = revAfterNet - toolCost;
+        const partnerPayout = netForShare > 0 ? Math.round(netForShare * (sharePct / 100)) : 0;
+        monthlyProfit = netForShare - partnerPayout;
+        explainLine = `Trừ ${sharePct}% Người hợp tác (-${partnerPayout.toLocaleString('vi-VN')}đ) • Trừ chi phí Team ứng chi nếu có (-${toolCost.toLocaleString('vi-VN')}đ)`;
+      }
+
+      const cumulativeAfterOffset = prevCarry + monthlyProfit;
+
+      document.getElementById('simResultBox').innerHTML = `
+        <div class="p-4 rounded-xl bg-white border-2 border-blue-300 space-y-2.5 text-xs md:text-sm">
+          <div class="flex flex-wrap justify-between gap-2 border-b border-slate-200 pb-2">
+            <span>Doanh thu Gross: <strong>${gross.toLocaleString('vi-VN')}đ</strong></span>
+            <span class="text-orange-700 font-bold">Trừ Phí Net (${netPct}%): -${netFee.toLocaleString('vi-VN')}đ</span>
+            <span class="text-blue-800 font-extrabold">Thu về sau Net: ${revAfterNet.toLocaleString('vi-VN')}đ</span>
+          </div>
+          <div class="text-slate-700 font-medium">${explainLine}</div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+            <div class="p-3 rounded-xl border-2 ${monthlyProfit >= 0 ? 'bg-emerald-50 border-emerald-400 text-emerald-950' : 'bg-rose-50 border-rose-400 text-rose-950'}">
+              <div class="text-xs font-bold uppercase">Lợi Nhuận / Lỗ Tháng Này:</div>
+              <div class="text-base md:text-lg font-extrabold mt-0.5">
+                ${monthlyProfit >= 0 ? '📈 LÃI: +' : '📉 LỖ: '}${monthlyProfit.toLocaleString('vi-VN')}đ
+              </div>
+            </div>
+            <div class="p-3 rounded-xl border-2 ${cumulativeAfterOffset >= 0 ? 'bg-blue-50 border-blue-400 text-blue-950' : 'bg-amber-50 border-amber-400 text-amber-950'}">
+              <div class="text-xs font-bold uppercase">Tổng Lũy Kế (Sau Bù Trừ Tháng Trước):</div>
+              <div class="text-base md:text-lg font-extrabold mt-0.5">
+                ${cumulativeAfterOffset >= 0 ? '💰 DƯ LÃI: +' : '🔄 CÒN ÂM LỖ: '}${cumulativeAfterOffset.toLocaleString('vi-VN')}đ
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function copyAllTeamAccounts() {
+      const text = [
+        '🚀 HỆ THỐNG QUẢN LÝ ĐA KÊNH YOUTUBE (BẢN V17.0 ONLINE 24/7)',
+        '👉 Link truy cập Ứng dụng 24/7: https://phamngocthu661-lang.github.io/quan-ly-youtube/',
+        '📂 Kho Video Google Drive: https://drive.google.com/drive/folders/1VD8TwhwEM1142mdr493oycyZB5jtR4u9',
+        '',
+        '🔑 DANH SÁCH TÀI KHOẢN ĐĂNG NHẬP:',
+        '• Tổng Admin: admin / admin123',
+        '• Quản lý Nhân viên: ql_nhanvien / 123456',
+        '• Quản lý Hợp tác: ql_hoptac / 123456',
+        '• Nhân viên cố định: hung / 123 | mai / 123 | tuan / 123 | thao / 123',
+        '• Người hợp tác: nam / 123 | quan / 123',
+        '(Sau khi đăng nhập, mọi người vào Tab 4: Tài Khoản Của Tôi để tự đổi mật khẩu cá nhân)'
+      ].join('\n');
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(text);
+      }
+      const btn = document.getElementById('btnCopyAllAcc');
+      btn.textContent = '✅ Đã Copy! Dán (Ctrl+V) Ngay Vào Nhóm Zalo / Telegram';
+      setTimeout(() => {
+        btn.textContent = '📋 Copy Toàn Bộ Link & Tài Khoản Gửi Nhóm Zalo / Telegram';
+      }, 3000);
+    }
+
+    selectRoleDemo('ADMIN');
+    runFinanceSim();
+  </script>
+</body>
+</html>
